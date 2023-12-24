@@ -3,6 +3,8 @@
 require "bundler/setup"
 require "sinatra"
 
+set :public_folder, File.dirname(__FILE__) + "/public"
+
 before do
   @log_file_path = "visit_log.csv"
 end
