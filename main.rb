@@ -11,7 +11,7 @@ before do
 end
 
 get "/" do
-  log_request(request)
+  log_request(request) unless request.ip == ENV["UNINCLUDED"]
   @visits = File.foreach(@log_file_path).count
   erb :index
 end
@@ -23,6 +23,6 @@ end
 
 def log_request(request)
   CSV.open(@log_file_path, "a") do |log|
-    log << [Time.now.to_s, request.ip.to_s, request.user_agent, request.path]
+    log << [Time.now.to_s, request.ip, request.user_agent, request.path]
   end
 end
