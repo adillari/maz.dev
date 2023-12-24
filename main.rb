@@ -2,6 +2,7 @@
 
 require "bundler/setup"
 require "sinatra"
+require "csv"
 
 set :public_folder, File.dirname(__FILE__) + "/public"
 
@@ -15,8 +16,13 @@ get "/" do
   erb :index
 end
 
+get "/info" do
+  @visitors = CSV.read(@log_file_path)
+  erb :visitors
+end
+
 def log_request(request)
-  File.open(@log_file_path, "a") do |file|
-    file.puts "#{Time.now}, #{request.ip}, #{request.user_agent}, #{request.path}"
+  CSV.open(@log_file_path, "a") do |log|
+    log << [Time.now.to_s, request.ip.to_s, request.user_agent, request.path]
   end
 end
