@@ -23,6 +23,6 @@ end
 
 def log_request(request)
   CSV.open(@log_file_path, "a") do |log|
-    log << [Time.now.to_s, request.ip, request.user_agent, request.path]
+    log << [Time.now.strftime("%a, %m/%d/%y %l:%M %p"), request.ip, request.user_agent, request.path]
   end
 end
