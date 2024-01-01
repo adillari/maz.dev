@@ -11,7 +11,7 @@ before do
 end
 
 get "/" do
-  log_request(request) unless request.ip == ENV["UNINCLUDED"]
+  log_request(request) unless params[:no_log]
   @visits = File.foreach(@log_file_path).count
   erb :index
 end
