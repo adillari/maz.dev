@@ -16,11 +16,14 @@ get "/" do
   erb :index
 end
 
-# TODO: Hide behind a password
-# get "/info" do
-#   @visitors = CSV.read(@log_file_path)
-#   erb :visitors
-# end
+get "/info" do
+  if params[:show_log]
+    @visitors = CSV.read(@log_file_path)
+    erb :visitors
+  else
+    ""
+  end
+end
 
 def log_request(request)
   CSV.open(@log_file_path, "a") do |log|
