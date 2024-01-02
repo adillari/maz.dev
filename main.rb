@@ -21,7 +21,7 @@ get "/info" do
     @visitors = CSV.read(@log_file_path)
     erb :visitors
   else
-    ""
+    erb "<h1>Hi bot</h1>"
   end
 end
 
