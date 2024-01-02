@@ -17,7 +17,7 @@ get "/" do
 end
 
 get "/info" do
-  if params[:show_log]
+  if params[:show_log] == "true"
     @visitors = CSV.read(@log_file_path)
     erb :visitors
   else
